@@ -22,6 +22,12 @@ class HitsLocalRepo(
         )
     }
 
+    override suspend fun delete(hitTable: HitTable) = withContext(ioDispatcher) {
+        hitsDao.delete(
+                hitTable.objectID
+        )
+    }
+
     override fun observeHits(): LiveData<List<HitTable>> {
         return hitsDao.observeHits()
     }

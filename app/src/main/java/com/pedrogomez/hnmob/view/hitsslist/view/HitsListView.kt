@@ -1,22 +1,27 @@
 package com.pedrogomez.hnmob.view.hitsslist.view
 
 import android.content.Context
+import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.pedrogomez.hnmob.R
 import com.pedrogomez.hnmob.databinding.ViewHitListBinding
 import com.pedrogomez.hnmob.models.db.HitTable
 import com.pedrogomez.hnmob.utils.PageScrollListener
 import com.pedrogomez.hnmob.utils.extensions.remove
 import com.pedrogomez.hnmob.utils.extensions.show
-import com.pedrogomez.hnmob.view.hitsslist.view.listadapter.HitsAdapter
 import com.pedrogomez.hnmob.view.hitsslist.view.listadapter.HitViewHolder
+import com.pedrogomez.hnmob.view.hitsslist.view.listadapter.HitsAdapter
+import com.pedrogomez.hnmob.view.hitsslist.view.swipecontroler.SwipeController
 
 class HitsListView : ConstraintLayout,
     HitViewHolder.OnClickItemListener,
-    PageScrollListener.OnScrollEvents{
+    PageScrollListener.OnScrollEvents,
+    SwipeController.SwipeControllerActions{
 
     private lateinit var pageScrollListener: PageScrollListener
 
@@ -27,6 +32,8 @@ class HitsListView : ConstraintLayout,
     private lateinit var linearLayoutManager: LinearLayoutManager
 
     var onHitsListActions : OnHitsListActions? = null
+
+    val swipeController : SwipeController = SwipeController()
 
     constructor(context: Context) : super(context) {
         init(null, 0)
@@ -42,21 +49,24 @@ class HitsListView : ConstraintLayout,
 
     private fun init(attrs: AttributeSet?, defStyle: Int) {
         binding = ViewHitListBinding.inflate(
-            LayoutInflater.from(context),
-            this
+                LayoutInflater.from(context),
+                this
         )
         val a = context.obtainStyledAttributes(
-            attrs,
-            R.styleable.HitsListView,
-            defStyle,
-            0
+                attrs,
+                R.styleable.HitsListView,
+                defStyle,
+                0
         )
         initRecyclerView()
         a.recycle()
     }
 
     private fun initRecyclerView() {
-        hitsAdapter = HitsAdapter(this)
+        hitsAdapter = HitsAdapter(
+                this,
+                this
+        )
         linearLayoutManager = LinearLayoutManager(context)
         pageScrollListener = PageScrollListener(
                 linearLayoutManager,
@@ -76,6 +86,21 @@ class HitsListView : ConstraintLayout,
         binding.rvPokeItems.addOnScrollListener(
                 pageScrollListener
         )
+        val itemTouchhelper = ItemTouchHelper(
+                swipeController
+        )
+        itemTouchhelper.attachToRecyclerView(
+                binding.rvPokeItems
+        )
+        binding.rvPokeItems.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun onDraw(
+                    c: Canvas,
+                    parent: RecyclerView,
+                    state: RecyclerView.State
+            ) {
+                swipeController!!.onDraw(c!!)
+            }
+        })
     }
 
     fun hideBtnToTop(){
@@ -103,9 +128,10 @@ class HitsListView : ConstraintLayout,
     }
 
     interface OnHitsListActions{
-        fun loadMore(page:Int)
+        fun loadMore(page: Int)
         fun loadAgain()
         fun goToItemDetail(data: HitTable)
+        fun deleted(hitItem:HitTable)
     }
 
     override fun goToItemDetail(data: HitTable) {
@@ -122,6 +148,10 @@ class HitsListView : ConstraintLayout,
             return
         }
         showBtnToTop()
+    }
+
+    override fun deleted(hitItem:HitTable) {
+        onHitsListActions?.deleted(hitItem)
     }
 
 }

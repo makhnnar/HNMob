@@ -28,6 +28,10 @@ class HitsProvider(
         }
     }
 
+    override suspend fun delete(hitItem: HitTable) {
+        localDataSource.delete(hitItem)
+    }
+
     suspend fun updateLocalWithRemote(toInsert:List<HitTable>){
         toInsert.forEach {
             localDataSource.insert(it)
@@ -41,6 +45,7 @@ class HitsProvider(
     interface LocalDataSource{
         suspend fun getAllHits(): List<HitTable>
         suspend fun insert(hitTable: HitTable)
+        suspend fun delete(hitTable: HitTable)
         fun observeHits(): LiveData<List<HitTable>>
     }
 

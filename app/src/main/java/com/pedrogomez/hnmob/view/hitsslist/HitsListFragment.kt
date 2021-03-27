@@ -95,4 +95,8 @@ class HitsListFragment : Fragment(),
         sharedHitsViewModel.saveSelected(data)
         findNavController().navigate(R.id.action_productosListFragment_to_productosDetailFragment)
     }
+
+    override fun deleted(hitItem: HitTable) {
+        sharedHitsViewModel.delete(hitItem)
+    }
 }

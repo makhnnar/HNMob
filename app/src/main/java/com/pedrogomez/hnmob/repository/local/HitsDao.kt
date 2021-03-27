@@ -19,4 +19,7 @@ interface HitsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(hitTable: HitTable)
 
+    @Query(value = "UPDATE hit_table SET isDeleted='true' WHERE hit_table.objectID=:objectID")
+    fun delete(objectID:String)
+
 }

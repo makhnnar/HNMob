@@ -45,9 +45,16 @@ class SharedHitsViewModel(
         //scope.coroutineContext.cancelChildren()
     }
 
+    fun delete(hitItem: HitTable) {
+        viewModelScope.launch {
+            repository.delete(hitItem)
+        }
+    }
+
     interface Repository{
 
         suspend fun loadHits(page:Int)
+        suspend fun delete(hitItem: HitTable)
         fun observeHits(): LiveData<List<HitTable>>
 
     }
