@@ -1,8 +1,12 @@
 package com.pedrogomez.hnmob.view.hitdetail.views
 
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.webkit.WebSettings
+import android.webkit.WebViewClient
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.pedrogomez.hnmob.R
 import com.pedrogomez.hnmob.databinding.ViewHitDetailBinding
@@ -42,6 +46,7 @@ class HitDetailView : ConstraintLayout {
         a.recycle()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun setData(hitTable: HitTable){
         try{
             if (hitTable.url!=null){
@@ -51,6 +56,11 @@ class HitDetailView : ConstraintLayout {
             }
         }catch (e: Exception){
             "hitData: error".print()
+        }
+        binding.webView.settings.javaScriptEnabled = true
+        binding.webView.settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
+        binding.webView.webViewClient =  object : WebViewClient(){
+
         }
         binding.btnBack.setOnClickListener {
             onDetailActions?.onBackPressed()

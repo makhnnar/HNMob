@@ -13,7 +13,7 @@ interface HitsDao {
     @Query("SELECT * FROM hit_table")
     fun observeHits(): LiveData<List<HitTable>>
 
-    @Query("SELECT * from hit_table")
+    @Query(value = "SELECT * from hit_table WHERE hit_table.isDeleted='false'")
     fun getAllHits(): List<HitTable>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
