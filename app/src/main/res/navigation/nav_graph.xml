@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/productosListFragment">
+
+    <fragment
+        android:id="@+id/productosDetailFragment"
+        android:name="com.pedrogomez.hnmob.view.hitdetail.HitDetailFragment"
+        android:label="fragment_producto_detail"
+        tools:layout="@layout/fragment_hit_detail">
+        <action
+            android:id="@+id/action_productosDetailFragment_to_productosListFragment"
+            app:destination="@id/productosListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productosListFragment"
+        android:name="com.pedrogomez.hnmob.view.hitsslist.HitsListFragment"
+        android:label="fragment_productos_list"
+        tools:layout="@layout/fragment_hits_list" >
+        <action
+            android:id="@+id/action_productosListFragment_to_productosDetailFragment"
+            app:destination="@id/productosDetailFragment" />
+    </fragment>
+
+</navigation>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">HNMobile</string>
+    <string name="search_hint"> Enter the id or name of the pokemon </string>
+    <string name="search_no_results"> Pokemon not found </string>
+    <string name="search_error"> There was an error. Check your internet connection </string>
+    <string name="title_date_creation"> Date Publication </string>
+    <string name="title_direction"> Direction </string>
+    <string name="title_desc"> Description </string>
+    <string name="title_name"> Name </string>
+    <string name="title_owner"> Owner </string>
+    <string name="title_price"> Price </string>
+    <string name="dummy_desc">--- --- -- ----- --- -- -</string>
+</resources>
