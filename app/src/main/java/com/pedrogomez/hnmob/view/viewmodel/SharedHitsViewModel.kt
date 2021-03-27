@@ -30,6 +30,12 @@ class SharedHitsViewModel(
         }
     }
 
+    fun loadMore(page:Int){
+        viewModelScope.launch {
+            repository.loadHits(page)
+        }
+    }
+
     fun saveSelected(productItem: HitTable){
         selectedHitLiveData.value = productItem
     }

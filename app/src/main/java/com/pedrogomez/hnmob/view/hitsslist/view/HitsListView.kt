@@ -8,19 +8,25 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pedrogomez.hnmob.R
 import com.pedrogomez.hnmob.databinding.ViewHitListBinding
 import com.pedrogomez.hnmob.models.db.HitTable
+import com.pedrogomez.hnmob.utils.PageScrollListener
 import com.pedrogomez.hnmob.utils.extensions.remove
 import com.pedrogomez.hnmob.utils.extensions.show
 import com.pedrogomez.hnmob.view.hitsslist.view.listadapter.HitsAdapter
 import com.pedrogomez.hnmob.view.hitsslist.view.listadapter.HitViewHolder
 
 class HitsListView : ConstraintLayout,
-    HitViewHolder.OnClickItemListener{
+    HitViewHolder.OnClickItemListener,
+    PageScrollListener.OnScrollEvents{
+
+    private lateinit var pageScrollListener: PageScrollListener
 
     lateinit var binding : ViewHitListBinding
 
     private lateinit var hitsAdapter : HitsAdapter
 
-    var onProductListActions : OnProductListActions? = null
+    private lateinit var linearLayoutManager: LinearLayoutManager
+
+    var onHitsListActions : OnHitsListActions? = null
 
     constructor(context: Context) : super(context) {
         init(null, 0)
@@ -51,20 +57,33 @@ class HitsListView : ConstraintLayout,
 
     private fun initRecyclerView() {
         hitsAdapter = HitsAdapter(this)
+        linearLayoutManager = LinearLayoutManager(context)
+        pageScrollListener = PageScrollListener(
+                linearLayoutManager,
+                this,
+                true
+        )
         binding.rvPokeItems.apply{
             adapter = hitsAdapter
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = linearLayoutManager
         }
         binding.srlContainer.setOnRefreshListener {
-            onProductListActions?.loadAgain()
+            onHitsListActions?.loadAgain()
         }
         binding.btnToTop.setOnClickListener {
             binding.rvPokeItems.smoothScrollToPosition(0)
         }
+        binding.rvPokeItems.addOnScrollListener(
+                pageScrollListener
+        )
     }
 
     fun hideBtnToTop(){
         binding.btnToTop.hide()
+    }
+
+    fun showBtnToTop(){
+        binding.btnToTop.show()
     }
 
     fun showLoader(){
@@ -79,17 +98,30 @@ class HitsListView : ConstraintLayout,
         binding.pbPokesLoading.remove()
     }
 
-    fun setData(productItems: List<HitTable>){
-        hitsAdapter.setData(productItems)
+    fun setData(hitItems: List<HitTable>){
+        hitsAdapter.setData(hitItems)
     }
 
-    interface OnProductListActions{
+    interface OnHitsListActions{
+        fun loadMore(page:Int)
         fun loadAgain()
         fun goToItemDetail(data: HitTable)
     }
 
     override fun goToItemDetail(data: HitTable) {
-        onProductListActions?.goToItemDetail(data)
+        onHitsListActions?.goToItemDetail(data)
+    }
+
+    override fun onLoadMore(currentPage: Int) {
+        onHitsListActions?.loadMore(currentPage)
+    }
+
+    override fun scrollIsOnTop(isOnTop: Boolean) {
+        if(isOnTop){
+            hideBtnToTop()
+            return
+        }
+        showBtnToTop()
     }
 
 }

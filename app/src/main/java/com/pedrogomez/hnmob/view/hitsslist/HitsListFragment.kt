@@ -17,7 +17,7 @@ import com.pedrogomez.hnmob.view.hitsslist.view.HitsListView
 import org.koin.android.viewmodel.ext.android.getViewModel
 
 class HitsListFragment : Fragment(),
-    HitsListView.OnProductListActions{
+    HitsListView.OnHitsListActions{
 
     private val sharedHitsViewModel by lazy {
         requireParentFragment().getViewModel<SharedHitsViewModel>()
@@ -42,7 +42,7 @@ class HitsListFragment : Fragment(),
         val view = binding.root
         initObservers()
         binding.productsListView.hideBtnToTop()
-        binding.productsListView.onProductListActions = this
+        binding.productsListView.onHitsListActions = this
         sharedHitsViewModel.loadContent()
         return view
     }
@@ -81,6 +81,10 @@ class HitsListFragment : Fragment(),
                     }
                 }
         )
+    }
+
+    override fun loadMore(page: Int) {
+        sharedHitsViewModel.loadMore(page)
     }
 
     override fun loadAgain() {

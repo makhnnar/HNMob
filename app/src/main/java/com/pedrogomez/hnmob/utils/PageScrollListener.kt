@@ -1,17 +1,17 @@
 package com.pedrogomez.hnmob.utils
 
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class PageScrollListener(
-    private val gridLayoutManager: GridLayoutManager?
+class PageScrollListener(
+    private val linearLayoutManager: LinearLayoutManager?,
+    private val onScrollEvents:OnScrollEvents?,
+    private var isEnable : Boolean = false
 ) : RecyclerView.OnScrollListener() {
 
     private var previousTotal = 1 // The total number of items in the dataset after the last load
     private var loading = true // True if we are still waiting for the last set of data to load.
     private val visibleThreshold = 5 // The minimum amount of items to have below your current scroll position before loading more.
-
-    private var isEnable = false
 
     var firstVisibleItem = 0
     var visibleItemCount = 0
@@ -22,9 +22,9 @@ abstract class PageScrollListener(
         super.onScrolled(recyclerView, dx, dy)
         visibleItemCount = recyclerView.childCount
         if(isEnable){
-            if (gridLayoutManager != null) {
-                totalItemCount = gridLayoutManager.itemCount
-                firstVisibleItem = gridLayoutManager.findFirstVisibleItemPosition()
+            if (linearLayoutManager != null) {
+                totalItemCount = linearLayoutManager.itemCount
+                firstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition()
             } else {
                 totalItemCount = 0
                 firstVisibleItem = 0
@@ -41,7 +41,7 @@ abstract class PageScrollListener(
                 // End has been reached
                 // Do something
                 currentPage++
-                onLoadMore(currentPage)
+                onScrollEvents?.onLoadMore(currentPage)
                 loading = true
             }
         }
@@ -49,8 +49,8 @@ abstract class PageScrollListener(
 
     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
         super.onScrollStateChanged(recyclerView, newState)
-        val visiblePos = gridLayoutManager?.findFirstCompletelyVisibleItemPosition()?:0
-        scrollIsOnTop(visiblePos<1)
+        val visiblePos = linearLayoutManager?.findFirstCompletelyVisibleItemPosition()?:0
+        onScrollEvents?.scrollIsOnTop(visiblePos<1)
     }
 
     fun initFields(){
@@ -67,8 +67,11 @@ abstract class PageScrollListener(
         isEnable = enable
     }
 
-    abstract fun onLoadMore(currentPage: Int)
+    interface OnScrollEvents{
 
-    abstract fun scrollIsOnTop(isOnTop:Boolean)
+        fun onLoadMore(currentPage: Int)
+        fun scrollIsOnTop(isOnTop:Boolean)
+
+    }
 
 }
