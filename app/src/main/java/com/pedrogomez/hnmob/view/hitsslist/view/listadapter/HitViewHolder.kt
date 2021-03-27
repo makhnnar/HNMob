@@ -38,6 +38,7 @@ class HitViewHolder(
         onClickItemListener: OnClickItemListener,
         buttonsActions: SwipeController.SwipeControllerActions
     ) {
+        Log.i("delete","${data.isDeleted} :O")
         if(data.title!=null){
             binding?.tvTitle?.text = data.title
         }else{

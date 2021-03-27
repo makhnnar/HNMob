@@ -28,7 +28,7 @@ data class HitTable(
         @ColumnInfo(name = "url")
         val url: String?,
         @ColumnInfo(name = "isDeleted")
-        val isDeleted: Boolean = false
+        var isDeleted: Boolean = false
 )
 
 /*fun HitTable.toPresentationModel() : Hit {

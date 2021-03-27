@@ -3,6 +3,7 @@ package com.pedrogomez.hnmob.repository.local
 import androidx.lifecycle.LiveData
 import com.pedrogomez.hnmob.models.db.HitTable
 import com.pedrogomez.hnmob.repository.HitsProvider
+import com.pedrogomez.hnmob.utils.extensions.print
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -23,9 +24,11 @@ class HitsLocalRepo(
     }
 
     override suspend fun delete(hitTable: HitTable) = withContext(ioDispatcher) {
-        hitsDao.delete(
-                hitTable.objectID
+        hitTable.isDeleted = true
+        val result = hitsDao.delete(
+                hitTable
         )
+        "delete: ${hitTable.objectID} => $result".print()
     }
 
     override fun observeHits(): LiveData<List<HitTable>> {
