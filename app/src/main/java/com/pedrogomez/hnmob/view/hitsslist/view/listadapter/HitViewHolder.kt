@@ -31,7 +31,11 @@ class HitViewHolder(
         data: HitTable,
         onClickItemListener: OnClickItemListener
     ) {
-        binding?.tvTitle?.text = data.title
+        if(data.title!=null){
+            binding?.tvTitle?.text = data.title
+        }else{
+            binding?.tvTitle?.text = data.story_title
+        }
         binding?.tvAuthor?.text = data.author
         binding?.tvCreated?.text = "${data.created_at_i}"
         binding?.itemRowContainer?.setOnClickListener {
