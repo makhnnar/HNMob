@@ -12,6 +12,7 @@ import com.pedrogomez.hnmob.R
 import com.pedrogomez.hnmob.databinding.ViewHitListBinding
 import com.pedrogomez.hnmob.models.db.HitTable
 import com.pedrogomez.hnmob.utils.PageScrollListener
+import com.pedrogomez.hnmob.utils.extensions.print
 import com.pedrogomez.hnmob.utils.extensions.remove
 import com.pedrogomez.hnmob.utils.extensions.show
 import com.pedrogomez.hnmob.view.hitsslist.view.listadapter.HitViewHolder
@@ -124,7 +125,8 @@ class HitsListView : ConstraintLayout,
     }
 
     fun setData(hitItems: List<HitTable>){
-        hitsAdapter.setData(hitItems)
+        "size in adapter ${hitItems.size}".print()
+        hitsAdapter.submitList(hitItems)
     }
 
     interface OnHitsListActions{

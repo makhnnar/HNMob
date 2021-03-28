@@ -2,6 +2,7 @@ package com.pedrogomez.hnmob.view.hitsslist.view.listadapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pedrogomez.hnmob.models.db.HitTable
 import com.pedrogomez.hnmob.utils.extensions.print
@@ -10,9 +11,7 @@ import com.pedrogomez.hnmob.view.hitsslist.view.swipecontroler.SwipeController
 class HitsAdapter(
     private val onClickItemListener: HitViewHolder.OnClickItemListener,
     private val buttonsActions: SwipeController.SwipeControllerActions
-) : RecyclerView.Adapter<HitViewHolder>() {
-
-    private var items: ArrayList<HitTable> = ArrayList()
+) : ListAdapter<HitTable,HitViewHolder>(TaskDiffCallback()) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -31,26 +30,11 @@ class HitsAdapter(
         holder: HitViewHolder,
         position: Int
     ) {
+        val item = getItem(position)
         holder.setData(
-            items[position],
+            item,
             onClickItemListener,
             buttonsActions
         )
-    }
-
-    override fun getItemCount() = items.size
-
-    fun setData(hitItems: List<HitTable>?) {
-        hitItems?.let {
-            items.clear()
-            items.addAll(it)
-            "size in adapter ${items.size}".print()
-            notifyItemInserted(items.size)
-        }
-    }
-
-    fun clearData(){
-        items.clear()
-        notifyDataSetChanged()
     }
 }
