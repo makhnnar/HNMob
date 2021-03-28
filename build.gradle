@@ -10,6 +10,7 @@ buildscript {
         roomVersion = '2.2.6'
         archLifecycleVersion = "2.3.0"
         coroutinesVersion = '1.2.1'
+        robolectricVersion = '4.3.1'
     }
     repositories {
         google()

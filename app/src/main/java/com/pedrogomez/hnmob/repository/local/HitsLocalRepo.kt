@@ -35,4 +35,10 @@ class HitsLocalRepo(
         return hitsDao.observeHits()
     }
 
+    override suspend fun updateLocal(toInsert: List<HitTable>) {
+        toInsert.forEach {
+            insert(it)
+        }
+    }
+
 }

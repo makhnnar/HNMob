@@ -8,8 +8,6 @@ import com.pedrogomez.hnmob.models.db.HitTable
 import com.pedrogomez.hnmob.utils.extensions.print
 import com.pedrogomez.hnmob.view.viewmodel.SharedHitsViewModel
 
-import com.pedrogomez.hnmob.models.result.Result
-
 /**
  * this class is for get which repo is going to be consumed
  * */
@@ -38,9 +36,7 @@ class HitsProvider(
     }
 
     suspend fun updateLocalWithRemote(toInsert:List<HitTable>){
-        toInsert.forEach {
-            localDataSource.insert(it)
-        }
+        localDataSource.updateLocal(toInsert)
     }
 
     override fun observeHits(): LiveData<List<HitTable>> {
@@ -52,6 +48,7 @@ class HitsProvider(
         suspend fun insert(hitTable: HitTable)
         suspend fun delete(hitTable: HitTable)
         fun observeHits(): LiveData<List<HitTable>>
+        suspend fun updateLocal(toInsert:List<HitTable>)
     }
 
     interface RemoteDataSource{

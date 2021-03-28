@@ -63,6 +63,7 @@ dependencies {
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3'
     testImplementation "androidx.test:core-ktx:$androidXTestCoreVersion"
     testImplementation "androidx.test.ext:junit:$androidXTestExtKotlinRunnerVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
     testImplementation 'org.mockito:mockito-core:2.19.0'
 
     //room
