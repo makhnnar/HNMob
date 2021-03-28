@@ -7,10 +7,10 @@ import com.pedrogomez.hnmob.models.db.HitTable
 @Dao
 interface HitsDao {
 
-    @Query(value = "SELECT * from hit_table WHERE hit_table.isDeleted=:filter")
+    @Query(value = "SELECT * from hit_table WHERE hit_table.isDeleted=:filter ORDER BY created_at_i DESC")
     fun getAllHits(filter:Boolean = false): List<HitTable>
 
-    @Query(value = "SELECT * from hit_table WHERE hit_table.isDeleted=:filter")
+    @Query(value = "SELECT * from hit_table WHERE hit_table.isDeleted=:filter ORDER BY created_at_i DESC")
     fun observeHits(filter:Boolean = false): LiveData<List<HitTable>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
