@@ -18,7 +18,7 @@ data class HitTable(
         val author: String,
         @NonNull
         @ColumnInfo(name = "created_at_i")
-        val created_at_i: Int,
+        val created_at_i: Long,
         @ColumnInfo(name = "story_title")
         val story_title: String?,
         @ColumnInfo(name = "story_url")

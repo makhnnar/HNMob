@@ -33,7 +33,7 @@ class HitsProvider(
         localDataSource.delete(hitItem)
     }
 
-    override suspend fun getAllHits() : Result<List<HitTable>> {
+    override suspend fun getAllHits() : List<HitTable> {
         return localDataSource.getAllHits()
     }
 
@@ -48,7 +48,7 @@ class HitsProvider(
     }
 
     interface LocalDataSource{
-        suspend fun getAllHits(): Result<List<HitTable>>
+        suspend fun getAllHits(): List<HitTable>
         suspend fun insert(hitTable: HitTable)
         suspend fun delete(hitTable: HitTable)
         fun observeHits(): LiveData<List<HitTable>>

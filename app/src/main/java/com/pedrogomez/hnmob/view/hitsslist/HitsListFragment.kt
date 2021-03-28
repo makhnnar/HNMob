@@ -68,6 +68,12 @@ class HitsListFragment : Fragment(),
                         binding.productsListView.showLoader()
                     }
                     is Error -> {
+                        context?.let{
+                            shortToast(
+                                it,
+                                this.getString(R.string.search_error)
+                            )
+                        }
                         binding.productsListView.hideLoader()
                     }
                 }

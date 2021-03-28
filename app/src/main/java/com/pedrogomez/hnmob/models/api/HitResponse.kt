@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 data class HitResponse(
         val objectID: String,
         val author: String,
-        val created_at_i: Int,
+        val created_at_i: Long,
         val story_title: String?,
         val story_url: String?,
         val title: String?,

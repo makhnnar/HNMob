@@ -63,7 +63,7 @@ class SharedHitsViewModel(
 
         suspend fun loadHits(page:Int)
         suspend fun delete(hitItem: HitTable)
-        suspend fun getAllHits(): Result<List<HitTable>>
+        suspend fun getAllHits(): List<HitTable>
         fun observeHits(): LiveData<List<HitTable>>
 
     }
