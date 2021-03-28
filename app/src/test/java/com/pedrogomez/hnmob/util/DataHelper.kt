@@ -43,6 +43,7 @@ class DataHelper {
             HITTABLE
         )
         val LIVEHISTDATA = liveData<List<HitTable>> { HITSLIST }
+        val EMPTYHISTS : List<HitTable> = emptyList()
     }
 
 }
