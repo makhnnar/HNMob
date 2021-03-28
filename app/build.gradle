@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'kotlin-android-extensions'
     id 'kotlinx-serialization'
     id 'androidx.navigation.safeargs'
 }
@@ -92,7 +91,7 @@ dependencies {
     // Kotlin
     //kapt "androidx.lifecycle:lifecycle-compiler:$archLifecycleVersion"
     //implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"
-    //implementation "androidx.lifecycle:lifecycle-livedata-ktx:$archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$archLifecycleVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 

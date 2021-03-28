@@ -43,43 +43,35 @@ class HitsListFragment : Fragment(),
         initObservers()
         binding.productsListView.hideBtnToTop()
         binding.productsListView.onHitsListActions = this
-        sharedHitsViewModel.loadContent()
+        sharedHitsViewModel.loadFirstPage()
         return view
     }
 
     private fun initObservers(){
-        sharedHitsViewModel.hitsListStateApi.observe(
+        sharedHitsViewModel.hitsListLiveData.observe(
             viewLifecycleOwner,
-            Observer { result ->
-                when (result) {
+            Observer {
+                binding.productsListView.setData(
+                    it
+                )
+                binding.productsListView.hideLoader()
+            }
+        )
+        sharedHitsViewModel.loaderData.observe(
+            viewLifecycleOwner,
+            Observer {
+                when (it) {
                     is Result.Success -> {
                         binding.productsListView.hideLoader()
                     }
-                    is Result.LoadingNewContent -> {
+                    is Result.Loading -> {
                         binding.productsListView.showLoader()
                     }
-                    is Result.LoadingMoreContent -> {
-                        binding.productsListView.showLoader()
-                    }
-                    is Result.Error -> {
-                        context?.let{
-                            shortToast(
-                                it,
-                                this.getString(R.string.search_error)
-                            )
-                        }
+                    is Error -> {
                         binding.productsListView.hideLoader()
                     }
                 }
             }
-        )
-        sharedHitsViewModel.hitsListLiveData.observe(
-                viewLifecycleOwner,
-                Observer {
-                    it?.let{
-                        binding.productsListView.setData(it.toList())
-                    }
-                }
         )
     }
 
@@ -88,7 +80,7 @@ class HitsListFragment : Fragment(),
     }
 
     override fun loadAgain() {
-        sharedHitsViewModel.loadContent()
+        sharedHitsViewModel.reloadContent()
     }
 
     override fun goToItemDetail(data: HitTable) {

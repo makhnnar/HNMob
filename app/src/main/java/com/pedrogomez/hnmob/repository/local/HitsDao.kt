@@ -7,8 +7,8 @@ import com.pedrogomez.hnmob.models.db.HitTable
 @Dao
 interface HitsDao {
 
-    @Query("SELECT * FROM hit_table")
-    fun getAllHits(): List<HitTable>
+    @Query(value = "SELECT * from hit_table WHERE hit_table.isDeleted=:filter")
+    fun getAllHits(filter:Boolean = false): List<HitTable>
 
     @Query(value = "SELECT * from hit_table WHERE hit_table.isDeleted=:filter")
     fun observeHits(filter:Boolean = false): LiveData<List<HitTable>>

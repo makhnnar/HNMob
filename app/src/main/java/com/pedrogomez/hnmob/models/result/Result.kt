@@ -1,12 +1,16 @@
 package com.pedrogomez.hnmob.models.result
 
-sealed class Result{
-    data class Success(val finished: Boolean):Result()
-    data class LoadingNewContent(val status: Boolean):Result()
-    data class LoadingMoreContent(val status: Boolean):Result()
-    sealed class Error(val errorMsg: String):Result() {
-        class RecoverableError(errorMsg: String) : Error(errorMsg)
-        class NonRecoverableError(errorMsg: String) :
-            Error(errorMsg)
+sealed class Result<out R> {
+
+    data class Success<out T>(val data: T) : Result<T>()
+    data class Error(val exception: Exception) : Result<Nothing>()
+    object Loading : Result<Nothing>()
+
+    override fun toString(): String {
+        return when (this) {
+            is Success<*> -> "Success[data=$data]"
+            is Error -> "Error[exception=$exception]"
+            Loading -> "Loading"
+        }
     }
 }

@@ -28,7 +28,7 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
-        android:id="@+id/pbPokesLoading"
+        android:id="@+id/pbLoading"
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

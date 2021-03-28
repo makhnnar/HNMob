@@ -1,7 +1,10 @@
 package com.pedrogomez.hnmob.repository.local
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import com.pedrogomez.hnmob.models.db.HitTable
+import com.pedrogomez.hnmob.models.result.Result
+import com.pedrogomez.hnmob.models.result.Result.*
 import com.pedrogomez.hnmob.repository.HitsProvider
 import com.pedrogomez.hnmob.utils.extensions.print
 import kotlinx.coroutines.CoroutineDispatcher
@@ -13,8 +16,10 @@ class HitsLocalRepo(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : HitsProvider.LocalDataSource {
 
-    override suspend fun getAllHits(): List<HitTable> {
-        return hitsDao.getAllHits()
+    override suspend fun getAllHits() : Result<List<HitTable>> = withContext(ioDispatcher) {
+        Success(
+            hitsDao.getAllHits()
+        )
     }
 
     override suspend fun insert(hitTable: HitTable) = withContext(ioDispatcher) {

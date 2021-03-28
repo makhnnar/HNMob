@@ -79,6 +79,8 @@ class HitsListView : ConstraintLayout,
             layoutManager = linearLayoutManager
         }
         binding.srlContainer.setOnRefreshListener {
+            binding.srlContainer.isRefreshing = false
+            pageScrollListener.initFields()
             onHitsListActions?.loadAgain()
         }
         binding.btnToTop.setOnClickListener {
@@ -115,13 +117,15 @@ class HitsListView : ConstraintLayout,
     fun showLoader(){
         binding.srlContainer.isRefreshing = false
         binding.srlContainer.isEnabled = false
-        binding.pbPokesLoading.show()
+        binding.pbLoading.show()
+        pageScrollListener.enablePaging(false)
     }
 
     fun hideLoader(){
         binding.srlContainer.isRefreshing = false
         binding.srlContainer.isEnabled = true
-        binding.pbPokesLoading.remove()
+        binding.pbLoading.remove()
+        pageScrollListener.enablePaging(true)
     }
 
     fun setData(hitItems: List<HitTable>){
