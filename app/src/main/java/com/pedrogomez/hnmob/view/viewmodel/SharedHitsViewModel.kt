@@ -11,22 +11,30 @@ class SharedHitsViewModel(
 
     private val _hitsListLiveData : LiveData<List<HitTable>> = repository.observeHits()
 
-    val hitsListLiveData : LiveData<List<HitTable>> = _hitsListLiveData
+    val hitsListLiveData = _hitsListLiveData
 
     val selectedHitLiveData = MutableLiveData<HitTable>()
 
     val loaderData = MutableLiveData<Result<Boolean>>()
 
     fun reloadContent(){
+        setLoadingState()
+        viewModelScope.launch {
+            repository.loadHits(0)
+            setSuccessState()
+        }
+    }
+
+    fun setLoadingState(){
         loaderData.postValue(
             Result.Loading
         )
-        viewModelScope.launch {
-            repository.loadHits(0)
-            loaderData.postValue(
-                Result.Success(true)
-            )
-        }
+    }
+
+    fun setSuccessState(){
+        loaderData.postValue(
+            Result.Success(true)
+        )
     }
 
     fun loadFirstPage(){
@@ -34,14 +42,10 @@ class SharedHitsViewModel(
     }
 
     fun loadMore(page:Int){
-        loaderData.postValue(
-            Result.Loading
-        )
+        setLoadingState()
         viewModelScope.launch {
             repository.loadHits(page)
-            loaderData.postValue(
-                Result.Success(true)
-            )
+            setSuccessState()
         }
     }
 

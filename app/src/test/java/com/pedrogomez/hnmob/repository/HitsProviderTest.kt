@@ -8,6 +8,7 @@ import com.pedrogomez.hnmob.models.api.HitResponse
 import com.pedrogomez.hnmob.models.api.HitsListResponse
 import com.pedrogomez.hnmob.models.api.toPresentationModel
 import com.pedrogomez.hnmob.models.db.HitTable
+import com.pedrogomez.hnmob.util.DataHelper
 import com.pedrogomez.hnmob.util.getOrAwaitValue
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.resetMain
@@ -28,53 +29,15 @@ class HitsProviderTest {
 
     val PAGE = 1
 
-    companion object{
-        val HITTABLE = HitTable(
-                "objectId",
-                "author",
-                1000,
-                "story_title",
-                "story_url",
-                "title",
-                "url"
-        )
-        val HITSRESPONSE = HitsListResponse(
-            listOf(
-                HitResponse(
-                    "objectId",
-                    "author",
-                    1000,
-                    "story_title",
-                    "story_url",
-                    "title",
-                    "url"
-                ),
-                HitResponse(
-                    "objectId1",
-                    "author1",
-                    10001,
-                    "story_title1",
-                    "story_url1",
-                    "title1",
-                    "url1"
-                )
-            )
-        )
-        val HITSLIST = listOf(
-                HITTABLE
-        )
-        val LIVEHISTDATA = liveData<List<HitTable>> { HITSLIST }
-    }
-
-    var remoteDataSourceMock = RemoteDataSourceMock()
-    var localDataSourceMock =  LocalDataSourceMock()
+    var remoteDataSourceTD = RemoteDataSourceTD()
+    var localDataSourceTD =  LocalDataSourceTD()
 
     @Before
     fun setUp() {
         Dispatchers.setMain(mainThreadSurrogate)
         SUT = HitsProvider(
-            remoteDataSourceMock,
-            localDataSourceMock
+            remoteDataSourceTD,
+            localDataSourceTD
         )
     }
 
@@ -84,44 +47,40 @@ class HitsProviderTest {
         mainThreadSurrogate.close()
     }
 
-    //onLoadHits_getHitsData_passedParamsSuccess
     @Test
     fun onLoadHits_getHitsData_passedParamsSuccess() {
         runBlocking {
             launch(Dispatchers.Main) {
                 SUT.loadHits(PAGE)
-                remoteDataSourceMock.getHitsData(PAGE)
-                assertEquals(remoteDataSourceMock.page,PAGE)
+                remoteDataSourceTD.getHitsData(PAGE)
+                assertEquals(remoteDataSourceTD.page,PAGE)
             }
         }
     }
 
-    //onLoadHits_getHitsData_successResponse
     @Test
     fun onLoadHits_getHitsData_successResponse() {
         runBlocking {
             launch(Dispatchers.Main) {
                 SUT.loadHits(PAGE)
-                val response = remoteDataSourceMock.getHitsData(PAGE)
-                assertEquals(response, HITSRESPONSE)
+                val response = remoteDataSourceTD.getHitsData(PAGE)
+                assertEquals(response, DataHelper.HITSRESPONSE)
             }
         }
     }
 
-    //onLoadHits_getHitsData_failedResponse
     @Test
     fun onLoadHits_getHitsData_failedResponse() {
         failed()
         runBlocking {
             launch(Dispatchers.Main) {
                 SUT.loadHits(PAGE)
-                val response = remoteDataSourceMock.getHitsData(PAGE)
+                val response = remoteDataSourceTD.getHitsData(PAGE)
                 assertNull(response)
             }
         }
     }
 
-    //getAllHits_getAllHits_returnedSuccess
     @Test
     fun getAllHits_getAllHits_returnedSuccess() {
         runBlocking {
@@ -129,58 +88,49 @@ class HitsProviderTest {
                 val list = SUT.getAllHits()
                 assertEquals(
                         list,
-                        HITSLIST
+                        DataHelper.HITSLIST
                 )
             }
         }
     }
 
-    //delete_delete_passedParamsSuccess
     @Test
     fun delete_delete_passedParamsSuccess() {
         runBlocking {
             launch(Dispatchers.Main) {
-                SUT.delete(HITTABLE)
+                SUT.delete(DataHelper.HITTABLE)
                 assertEquals(
-                        localDataSourceMock.hitToDelete,
-                        HITTABLE
+                        localDataSourceTD.hitToDelete,
+                        DataHelper.HITTABLE
                 )
             }
         }
     }
 
-    //observeHits_observeHits_returnedSuccess
     @Test
     fun observeHits_observeHits_returnedSuccess() {
         runBlocking {
-            try {
-                // Observe the LiveData forever
-                onDataChange()
-                val list = SUT.observeHits()
-                // Then the new task event is triggered
-                assertEquals(
-                        list.getOrAwaitValue(),
-                        HITSLIST
-                )
-            } finally {
-                // Whatever happens, don't forget to remove the observer!
-            }
+            onDataChange()
+            val list = SUT.observeHits()
+            assertEquals(
+                list.getOrAwaitValue(),
+                DataHelper.HITSLIST
+            )
         }
     }
 
-    //updateLocalWithRemote_insert_passedParamsSuccess
     @Test
     fun updateLocalWithRemote_insert_passedParamsSuccess() {
         runBlocking {
             launch(Dispatchers.Main) {
                 SUT.updateLocalWithRemote(
-                         HITSRESPONSE.hits.map {
+                        DataHelper.HITSRESPONSE.hits.map {
                              it.toPresentationModel()
                          }
                 )
                 assertEquals(
-                        localDataSourceMock.listHits,
-                        HITSRESPONSE.hits.map {
+                        localDataSourceTD.listHits,
+                        DataHelper.HITSRESPONSE.hits.map {
                             it.toPresentationModel()
                         }
                 )
@@ -189,16 +139,16 @@ class HitsProviderTest {
     }
 
     private fun failed() {
-        remoteDataSourceMock.failed = true
+        remoteDataSourceTD.failed = true
     }
 
     private fun onDataChange() {
-        localDataSourceMock.hitsMutLivDat.postValue(
-                HITSLIST
+        localDataSourceTD.hitsMutLivDat.postValue(
+                DataHelper.HITSLIST
         )
     }
 
-    class RemoteDataSourceMock : HitsProvider.RemoteDataSource {
+    class RemoteDataSourceTD : HitsProvider.RemoteDataSource {
 
         var page = 0
 
@@ -206,12 +156,12 @@ class HitsProviderTest {
 
         override suspend fun getHitsData(page: Int): HitsListResponse? {
             this.page = page
-            return if(failed) null else HITSRESPONSE
+            return if(failed) null else DataHelper.HITSRESPONSE
         }
 
     }
 
-    class LocalDataSourceMock : HitsProvider.LocalDataSource{
+    class LocalDataSourceTD : HitsProvider.LocalDataSource{
 
         var hitToDelete : HitTable? = null
 
@@ -222,7 +172,7 @@ class HitsProviderTest {
         var listHits = ArrayList<HitTable>()
 
         override suspend fun getAllHits(): List<HitTable> {
-            return HITSLIST
+            return DataHelper.HITSLIST
         }
 
         override suspend fun insert(hitTable: HitTable) {
