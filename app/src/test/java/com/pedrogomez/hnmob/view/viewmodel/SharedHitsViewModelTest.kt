@@ -2,7 +2,6 @@ package com.pedrogomez.hnmob.view.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.pedrogomez.hnmob.models.db.HitTable
 import com.pedrogomez.hnmob.models.result.Result
 import com.pedrogomez.hnmob.util.DataHelper
@@ -15,7 +14,7 @@ import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 
-@RunWith(AndroidJUnit4::class)
+//@RunWith(AndroidJUnit4::class)
 class SharedHitsViewModelTest {
 
     private lateinit var SUT: SharedHitsViewModel

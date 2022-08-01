@@ -22,4 +22,12 @@
     <color name="blue_light_l3">#81d4fa</color>
     <color name="blue_light_l1">#29b6f6</color>
     <color name="red_like">#D14D4D</color>
+    <color name="colorPrimary">#FF9800</color>
+    <color name="colorPrimaryDark">#E65100</color>
+    <color name="colorAccent">#2E7D32</color>
+    <color name="colorTitle">#ffffff</color>
+    <color name="colorLightGray">#ececec</color>
+    <color name="colorGray">#dedede</color>
+    <color name="colorDarkGray">#b4b4b4</color>
+    <color name="colorBlue">#2962FF</color>
 </resources>

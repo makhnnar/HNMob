@@ -3,7 +3,6 @@ package com.pedrogomez.hnmob.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.pedrogomez.hnmob.models.api.HitResponse
 import com.pedrogomez.hnmob.models.api.HitsListResponse
 import com.pedrogomez.hnmob.models.api.toPresentationModel
@@ -20,7 +19,7 @@ import org.junit.After
 import org.junit.Assert.*
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
+//@RunWith(AndroidJUnit4::class)
 class HitsProviderTest {
 
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")
