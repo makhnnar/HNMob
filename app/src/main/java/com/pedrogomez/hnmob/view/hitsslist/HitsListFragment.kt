@@ -14,7 +14,7 @@ import com.pedrogomez.hnmob.view.viewmodel.SharedHitsViewModel
 import com.pedrogomez.hnmob.utils.extensions.shortToast
 import com.pedrogomez.hnmob.models.result.Result
 import com.pedrogomez.hnmob.view.hitsslist.view.HitsListView
-import org.koin.android.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class HitsListFragment : Fragment(),
     HitsListView.OnHitsListActions{

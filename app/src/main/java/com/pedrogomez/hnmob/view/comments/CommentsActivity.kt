@@ -23,9 +23,7 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import com.pedrogomez.hnmob.R
 import com.pedrogomez.hnmob.databinding.ActivityCommentsBinding
-import com.pedrogomez.hnmob.databinding.ActivityMainBinding
 import com.pedrogomez.hnmob.view.login.SignInActivity
-
 
 class CommentsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCommentsBinding
@@ -52,11 +50,11 @@ class CommentsActivity : AppCompatActivity() {
         // "10.0.2.2" is a special value which allows the Android emulator to
         // connect to "localhost" on the host computer. The port values are
         // defined in the firebase.json file.
-        if (BuildConfig.DEBUG) {
+        /*if (BuildConfig.DEBUG) {
             Firebase.database.useEmulator("10.0.2.2", 9000)
             Firebase.auth.useEmulator("10.0.2.2", 9099)
             Firebase.storage.useEmulator("10.0.2.2", 9199)
-        }
+        }*/
 
         // Initialize Firebase Auth and check if the user is signed in
         auth = Firebase.auth

@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.pedrogomez.hnmob"
-        minSdkVersion 25
+        minSdkVersion 26
         targetSdkVersion 32
         versionCode 1
         versionName "1.0"
@@ -35,8 +35,8 @@ android {
         pickFirst("META-INF/kotlinx-serialization-runtime.kotlin_module")
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -77,6 +77,8 @@ dependencies {
     testImplementation "io.mockk:mockk:$mockk_version"
     testImplementation "io.insert-koin:koin-test:$koin_version"
     testImplementation "androidx.arch.core:core-testing:$core_testing_version"
+    testImplementation "io.ktor:ktor-client-mock:$ktor_version"
+    testImplementation "io.insert-koin:koin-test:$koin_version"
     androidTestImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation 'androidx.test:runner:1.4.0'
@@ -97,7 +99,7 @@ dependencies {
     implementation "io.ktor:ktor-client-auth:$ktor_version"
 
     //koin
-    implementation "org.koin:koin-android-viewmodel:$koin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
 
     //glide
     implementation 'com.github.bumptech.glide:glide:4.13.2'

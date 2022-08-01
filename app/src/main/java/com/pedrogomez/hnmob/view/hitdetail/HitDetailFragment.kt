@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import com.pedrogomez.hnmob.databinding.FragmentHitDetailBinding
 import com.pedrogomez.hnmob.view.hitdetail.views.HitDetailView
 import com.pedrogomez.hnmob.view.viewmodel.SharedHitsViewModel
-import org.koin.android.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 
 class HitDetailFragment : Fragment(),
