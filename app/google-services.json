@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "687490480233",
+    "project_id": "fir-hnmob-test",
+    "storage_bucket": "fir-hnmob-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:687490480233:android:73ec6ebed781e1e591caf8",
+        "android_client_info": {
+          "package_name": "com.pedrogomez.hnmob"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "687490480233-2p9lfcdehc44cmftft01536lao59u03c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pedrogomez.hnmob",
+            "certificate_hash": "a047b2935174f25d575944a00ddae8f6aa138935"
+          }
+        },
+        {
+          "client_id": "687490480233-8bmoqt019egbgntdct12heotkj2gm59o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwLyib6gulWvKm0mfftY2TQoP1KsVClNE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "687490480233-8bmoqt019egbgntdct12heotkj2gm59o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
