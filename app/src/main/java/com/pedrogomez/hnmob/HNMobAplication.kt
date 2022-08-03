@@ -4,8 +4,7 @@ import android.app.Application
 import com.pedrogomez.hnmob.di.dbModule
 import com.pedrogomez.hnmob.di.dbProvider
 import com.pedrogomez.hnmob.di.networkModule
-import com.pedrogomez.hnmob.view.di.productsRepository
-import com.pedrogomez.hnmob.view.di.viewModelListModule
+import com.pedrogomez.hnmob.view.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -25,7 +24,11 @@ class HNMobAplication : Application() {
                     productsRepository,
                     viewModelListModule,
                     dbModule,
-                    dbProvider
+                    dbProvider,
+                    firebaseAuth,
+                    firebaseDataBase,
+                    authViewModel,
+                    commentsViewModel
                 )
             )
         }

@@ -1,4 +1,4 @@
-package com.pedrogomez.hnmob.util
+package com.pedrogomez.hnmob.unittest.util
 
 import androidx.lifecycle.liveData
 import com.pedrogomez.hnmob.models.api.HitResponse
@@ -23,7 +23,14 @@ class DataHelper {
                     "objectId",
                     "author",
                     1000,
+                    1000,
+                    1000,
+                    "1000",
                     "story_title",
+                    "story_url",
+                    "story_url",
+                    "story_url",
+                    "story_url",
                     "story_url",
                     "title",
                     "url"
@@ -32,7 +39,14 @@ class DataHelper {
                     "objectId1",
                     "author1",
                     10001,
+                    10001,
+                    10001,
+                    "10001",
                     "story_title1",
+                    "story_url1",
+                    "story_url1",
+                    "story_url1",
+                    "story_url1",
                     "story_url1",
                     "title1",
                     "url1"

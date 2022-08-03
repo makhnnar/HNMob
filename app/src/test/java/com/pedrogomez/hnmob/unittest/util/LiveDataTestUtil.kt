@@ -1,4 +1,4 @@
-package com.pedrogomez.hnmob.util
+package com.pedrogomez.hnmob.unittest.util
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer

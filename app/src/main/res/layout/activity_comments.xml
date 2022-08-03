@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".comments.CommentsActivity">
+    tools:context=".view.comments.CommentsActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -14,13 +14,6 @@
         android:background="@color/colorLightGray"
         android:orientation="horizontal"
         android:paddingHorizontal="10dp">
-
-        <ImageView
-            android:id="@+id/addMessageImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            ads:srcCompat="@drawable/outline_add_photo_alternate_24" />
 
         <EditText
             android:id="@+id/messageEditText"
@@ -59,4 +52,5 @@
         android:layout_above="@+id/linearLayout"
         android:background="@android:color/white"
         android:paddingHorizontal="16dp" />
+
 </RelativeLayout>

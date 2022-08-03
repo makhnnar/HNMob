@@ -5,8 +5,6 @@ import com.pedrogomez.hnmob.repository.HitsProvider
 import com.pedrogomez.hnmob.repository.remote.HitsApiRepository
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
-import io.ktor.client.features.auth.*
-import io.ktor.client.features.auth.providers.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import org.koin.android.ext.koin.androidApplication

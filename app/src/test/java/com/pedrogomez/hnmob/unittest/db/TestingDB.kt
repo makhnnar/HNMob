@@ -1,11 +1,11 @@
-package com.pedrogomez.hnmob.db
+package com.pedrogomez.hnmob.unittest.db
 
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.pedrogomez.hnmob.repository.local.HitsDao
 import com.pedrogomez.hnmob.repository.local.HitsDataBase
-import com.pedrogomez.hnmob.util.DataHelper
+import com.pedrogomez.hnmob.unittest.util.DataHelper
 import io.ktor.utils.io.errors.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,7 +17,6 @@ import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 
 //@RunWith(AndroidJUnit4::class)
 class TestingDB {

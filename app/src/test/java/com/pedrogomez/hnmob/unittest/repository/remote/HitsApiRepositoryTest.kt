@@ -1,17 +1,14 @@
-package com.pedrogomez.hnmob.repository.remote
+package com.pedrogomez.hnmob.unittest.repository.remote
 
-import com.pedrogomez.hnmob.models.api.HitsListResponse
 import io.ktor.client.*
 import io.ktor.client.engine.*
 import io.ktor.client.engine.mock.*
-import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.utils.io.*
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
-import org.junit.Assert.*
 
 import org.junit.After
 import org.junit.Assert

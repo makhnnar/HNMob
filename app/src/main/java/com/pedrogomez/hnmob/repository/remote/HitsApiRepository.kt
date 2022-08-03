@@ -10,7 +10,7 @@ import com.pedrogomez.hnmob.utils.extensions.print
 
 class HitsApiRepository(
     private val client : HttpClient,
-    private val urlBase:String
+    private val urlBase : String
 ) : HitsProvider.RemoteDataSource {
 
     override suspend fun getHitsData(

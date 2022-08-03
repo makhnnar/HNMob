@@ -1,4 +1,4 @@
-package com.pedrogomez.hnmob.view.viewmodel
+package com.pedrogomez.hnmob.viewmodel
 
 import androidx.lifecycle.*
 import com.pedrogomez.hnmob.models.db.HitTable

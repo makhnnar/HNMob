@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.pedrogomez.hnmob.databinding.FragmentHitDetailBinding
 import com.pedrogomez.hnmob.view.hitdetail.views.HitDetailView
-import com.pedrogomez.hnmob.view.viewmodel.SharedHitsViewModel
+import com.pedrogomez.hnmob.viewmodel.SharedHitsViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 

@@ -1,14 +1,13 @@
-package com.pedrogomez.hnmob.repository
+package com.pedrogomez.hnmob.unittest.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
-import com.pedrogomez.hnmob.models.api.HitResponse
 import com.pedrogomez.hnmob.models.api.HitsListResponse
 import com.pedrogomez.hnmob.models.api.toPresentationModel
 import com.pedrogomez.hnmob.models.db.HitTable
-import com.pedrogomez.hnmob.util.DataHelper
-import com.pedrogomez.hnmob.util.getOrAwaitValue
+import com.pedrogomez.hnmob.repository.HitsProvider
+import com.pedrogomez.hnmob.unittest.util.DataHelper
+import com.pedrogomez.hnmob.unittest.util.getOrAwaitValue
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
@@ -17,7 +16,6 @@ import org.junit.Test
 
 import org.junit.After
 import org.junit.Assert.*
-import org.junit.runner.RunWith
 
 //@RunWith(AndroidJUnit4::class)
 class HitsProviderTest {

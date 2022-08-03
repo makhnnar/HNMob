@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.pedrogomez.hnmob.R
 import com.pedrogomez.hnmob.databinding.FragmentHitsListBinding
 import com.pedrogomez.hnmob.models.db.HitTable
-import com.pedrogomez.hnmob.view.viewmodel.SharedHitsViewModel
+import com.pedrogomez.hnmob.viewmodel.SharedHitsViewModel
 import com.pedrogomez.hnmob.utils.extensions.shortToast
 import com.pedrogomez.hnmob.models.result.Result
 import com.pedrogomez.hnmob.view.hitsslist.view.HitsListView

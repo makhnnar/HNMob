@@ -6,7 +6,7 @@ import com.pedrogomez.hnmob.models.api.HitsListResponse
 import com.pedrogomez.hnmob.models.api.toPresentationModel
 import com.pedrogomez.hnmob.models.db.HitTable
 import com.pedrogomez.hnmob.utils.extensions.print
-import com.pedrogomez.hnmob.view.viewmodel.SharedHitsViewModel
+import com.pedrogomez.hnmob.viewmodel.SharedHitsViewModel
 
 /**
  * this class is for get which repo is going to be consumed

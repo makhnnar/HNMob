@@ -13,21 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.firebase.codelab.friendlychat.model
+package com.pedrogomez.hnmob.view.comments.model
 
 class FriendlyMessage {
+
     var text: String? = null
     var name: String? = null
-    var photoUrl: String? = null
-    var imageUrl: String? = null
 
     // Empty constructor needed for Firestore serialization
     constructor()
 
-    constructor(text: String?, name: String?, photoUrl: String?, imageUrl: String?) {
+    constructor(text: String?, name: String?) {
         this.text = text
         this.name = name
-        this.photoUrl = photoUrl
-        this.imageUrl = imageUrl
     }
+
 }

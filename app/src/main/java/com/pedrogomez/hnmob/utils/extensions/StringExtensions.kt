@@ -8,7 +8,7 @@ import java.lang.Exception
 fun String?.isValid() = this != null && this.isNotEmpty() && !this.equals("null",true)
 
 fun Any?.print(){
-    Log.d("LogTagKoin", " $this")
+    //Log.d("LogTagKoin", " $this")
 }
 
 fun shortToast(context: Context,msg:String){
