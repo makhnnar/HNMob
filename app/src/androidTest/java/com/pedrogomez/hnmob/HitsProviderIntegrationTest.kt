@@ -1,15 +1,15 @@
-package com.pedrogomez.hnmob.integrations.repository
+package com.pedrogomez.hnmob
 
 import android.content.Context
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.SmallTest
 import com.pedrogomez.hnmob.repository.HitsProvider
 import com.pedrogomez.hnmob.repository.local.HitsDataBase
 import com.pedrogomez.hnmob.repository.local.HitsLocalRepo
 import com.pedrogomez.hnmob.repository.remote.HitsApiRepository
-import com.pedrogomez.hnmob.unittest.util.DataHelper
-import com.pedrogomez.hnmob.unittest.util.JsonFileHelper
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
 import io.ktor.client.features.json.*
@@ -18,14 +18,15 @@ import io.ktor.utils.io.*
 import kotlinx.coroutines.runBlocking
 import org.junit.*
 import org.junit.runner.RunWith
-import org.koin.core.context.stopKoin
-import org.robolectric.annotation.Config
 import java.io.IOException
 import kotlin.test.assertEquals
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [29])
+@SmallTest
 class HitsProviderIntegrationTest {
+
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var remoteDataSource : HitsProvider.RemoteDataSource
     private lateinit var db: HitsDataBase
@@ -99,8 +100,6 @@ class HitsProviderIntegrationTest {
     @After
     @Throws(IOException::class)
     fun closeDb() {
-        //if we don't stop koin you only could get one test work at time
-        stopKoin()
         db.close()
     }
 

@@ -3,6 +3,7 @@ package com.pedrogomez.hnmob.unittest.db
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.pedrogomez.hnmob.repository.local.HitsDao
 import com.pedrogomez.hnmob.repository.local.HitsDataBase
 import com.pedrogomez.hnmob.unittest.util.DataHelper
@@ -17,8 +18,13 @@ import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.koin.core.context.stopKoin
+import org.robolectric.annotation.Config
+import kotlin.test.assertEquals
 
-//@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4::class)
+@Config(sdk = [29])
 class TestingDB {
 
     private lateinit var hitsDao: HitsDao
@@ -37,14 +43,6 @@ class TestingDB {
         hitsDao = db.hits()
     }
 
-    @After
-    @Throws(IOException::class)
-    fun closeDb() {
-        db.close()
-        Dispatchers.resetMain() // reset main dispatcher to the original Main dispatcher
-        mainThreadSurrogate.close()
-    }
-
     @Test
     @Throws(Exception::class)
     fun writeAndRedHits() {
@@ -53,7 +51,7 @@ class TestingDB {
                 val hitTable = DataHelper.HITTABLE
                 hitsDao.insert(hitTable)
                 val hits = hitsDao.getAllHits()
-                Assert.assertEquals(hits,DataHelper.HITSLIST)
+                assertEquals(hits,DataHelper.HITSLIST)
             }
         }
     }
@@ -86,5 +84,15 @@ class TestingDB {
             }
         }
     }
+
+    @After
+    @Throws(IOException::class)
+    fun closeDb() {
+        stopKoin()
+        db.close()
+        Dispatchers.resetMain() // reset main dispatcher to the original Main dispatcher
+        mainThreadSurrogate.close()
+    }
+
 
 }

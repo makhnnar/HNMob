@@ -13,12 +13,14 @@ import org.koin.dsl.module
 val firebaseDataBase = module {
     single {
         Firebase.database.useEmulator("10.0.2.2", 9000)
+        Firebase.database
     }
 }
 
 val firebaseAuth = module {
     single {
         Firebase.auth.useEmulator("10.0.2.2", 9099)
+        Firebase.auth
     }
 }
 

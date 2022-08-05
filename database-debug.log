@@ -3,8 +3,9 @@ WARNING: Illegal reflective access by io.netty.util.internal.ReflectionUtil (fil
 WARNING: Please consider reporting this to the maintainers of io.netty.util.internal.ReflectionUtil
 WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
 WARNING: All illegal access operations will be denied in a future release
-17:48:49.769 [NamespaceSystem-akka.actor.default-dispatcher-6] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
-17:48:50.031 [main] INFO com.firebase.server.forge.App$ - Listening at localhost:9000
-17:48:57.470 [NamespaceSystem-akka.actor.default-dispatcher-7] INFO com.firebase.core.namespace.NamespaceActor - demo-hnmob-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 180ms, init: 0ms
-17:48:57.562 [NamespaceSystem-blocking-namespace-operation-dispatcher-9:demo-hnmob-default-rtdb$994293803:] INFO com.firebase.core.namespace.StateManager - Namespace demo-hnmob-default-rtdb status Active to Active
-17:50:57.516 [NamespaceSystem-akka.actor.default-dispatcher-7] INFO com.firebase.core.namespace.NamespaceActor - demo-hnmob successfully activated FBKV (SurveyIdle(0)) wait: 6ms, init: 0ms
+10:55:12.327 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+10:55:12.683 [main] INFO com.firebase.server.forge.App$ - Listening at localhost:9000
+10:55:22.310 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - demo-hnmob-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 196ms, init: 0ms
+10:55:22.402 [NamespaceSystem-blocking-namespace-operation-dispatcher-6:demo-hnmob-default-rtdb$-2093793546:] INFO com.firebase.core.namespace.StateManager - Namespace demo-hnmob-default-rtdb status Active to Active
+10:55:34.493 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - demo-hnmob successfully activated FBKV (SurveyIdle(0)) wait: 8ms, init: 0ms
+10:55:34.520 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - fir-hnmob-test-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 7ms, init: 0ms

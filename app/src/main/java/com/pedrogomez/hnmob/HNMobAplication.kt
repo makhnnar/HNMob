@@ -17,7 +17,7 @@ class HNMobAplication : Application() {
             androidContext(
                 this@HNMobAplication
             )
-            androidLogger()
+            //androidLogger()
             modules(
                 listOf(
                     networkModule,
