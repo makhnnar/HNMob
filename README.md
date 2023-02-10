@@ -6,4 +6,4 @@ To run the app:
     - Run the app from Android Studio
 
 to run firebase emulator
- - firebase emulators:start --project=demo-hnmob
+ - firebase emulators:start --project=demo-hnmob --import=./emulator_data --export-on-exit=./emulator_data

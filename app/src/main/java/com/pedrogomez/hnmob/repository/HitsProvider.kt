@@ -2,19 +2,20 @@ package com.pedrogomez.hnmob.repository
 
 import androidx.lifecycle.LiveData
 import com.pedrogomez.hnmob.models.api.HitResponse
-import com.pedrogomez.hnmob.models.api.HitsListResponse
 import com.pedrogomez.hnmob.models.api.toPresentationModel
 import com.pedrogomez.hnmob.models.db.HitTable
+import com.pedrogomez.hnmob.repository.local.LocalDataSource
+import com.pedrogomez.hnmob.repository.remote.RemoteDataSource
 import com.pedrogomez.hnmob.utils.extensions.print
-import com.pedrogomez.hnmob.viewmodel.SharedHitsViewModel
+import javax.inject.Inject
 
 /**
  * this class is for get which repo is going to be consumed
  * */
-class HitsProvider(
+class HitsProvider @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource
-    ) : SharedHitsViewModel.Repository {
+    ) : Repository {
 
     override suspend fun loadHits(page:Int) {
         val response = remoteDataSource.getHitsData(page)
@@ -43,16 +44,13 @@ class HitsProvider(
         return localDataSource.observeHits()
     }
 
-    interface LocalDataSource{
-        suspend fun getAllHits(): List<HitTable>
-        suspend fun insert(hitTable: HitTable)
-        suspend fun delete(hitTable: HitTable)
-        fun observeHits(): LiveData<List<HitTable>>
-        suspend fun updateLocal(toInsert:List<HitTable>)
-    }
+}
 
-    interface RemoteDataSource{
-        suspend fun getHitsData(page:Int): HitsListResponse?
-    }
+interface Repository{
+
+    suspend fun loadHits(page:Int)
+    suspend fun delete(hitItem: HitTable)
+    suspend fun getAllHits(): List<HitTable>
+    fun observeHits(): LiveData<List<HitTable>>
 
 }

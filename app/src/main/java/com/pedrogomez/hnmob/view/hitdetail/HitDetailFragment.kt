@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.pedrogomez.hnmob.databinding.FragmentHitDetailBinding
 import com.pedrogomez.hnmob.view.hitdetail.views.HitDetailView
 import com.pedrogomez.hnmob.viewmodel.SharedHitsViewModel
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 
 class HitDetailFragment : Fragment(),
@@ -19,9 +20,7 @@ class HitDetailFragment : Fragment(),
 
     private lateinit var binding: FragmentHitDetailBinding
 
-    private val sharedHitsViewModel by lazy {
-        requireParentFragment().getViewModel<SharedHitsViewModel>()
-    }
+    private val sharedHitsViewModel : SharedHitsViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

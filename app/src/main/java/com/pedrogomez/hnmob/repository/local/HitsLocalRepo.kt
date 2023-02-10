@@ -7,11 +7,12 @@ import com.pedrogomez.hnmob.utils.extensions.print
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class HitsLocalRepo(
+class HitsLocalRepo @Inject constructor(
     private val hitsDao: HitsDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-) : HitsProvider.LocalDataSource {
+) : LocalDataSource {
 
     override suspend fun getAllHits() : List<HitTable> = withContext(ioDispatcher) {
         hitsDao.getAllHits()
@@ -41,4 +42,12 @@ class HitsLocalRepo(
         }
     }
 
+}
+
+interface LocalDataSource{
+    suspend fun getAllHits(): List<HitTable>
+    suspend fun insert(hitTable: HitTable)
+    suspend fun delete(hitTable: HitTable)
+    fun observeHits(): LiveData<List<HitTable>>
+    suspend fun updateLocal(toInsert:List<HitTable>)
 }

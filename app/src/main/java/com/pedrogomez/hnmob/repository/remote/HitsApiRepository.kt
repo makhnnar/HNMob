@@ -7,11 +7,12 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import com.pedrogomez.hnmob.utils.extensions.print
+import javax.inject.Inject
 
-class HitsApiRepository(
+class HitsApiRepository @Inject constructor(
     private val client : HttpClient,
     private val urlBase : String
-) : HitsProvider.RemoteDataSource {
+) : RemoteDataSource {
 
     override suspend fun getHitsData(
         page:Int
@@ -32,4 +33,8 @@ class HitsApiRepository(
         }
     }
 
+}
+
+interface RemoteDataSource{
+    suspend fun getHitsData(page:Int): HitsListResponse?
 }

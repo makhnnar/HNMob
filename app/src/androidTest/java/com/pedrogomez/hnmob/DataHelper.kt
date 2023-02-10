@@ -1,6 +1,6 @@
 package com.pedrogomez.hnmob
 
-import androidx.lifecycle.liveData
+import androidx.lifecycle.LiveData
 import com.pedrogomez.hnmob.models.api.HitResponse
 import com.pedrogomez.hnmob.models.api.HitsListResponse
 import com.pedrogomez.hnmob.models.db.HitTable
@@ -56,8 +56,6 @@ class DataHelper {
         val HITSLIST = listOf(
             HITTABLE
         )
-        val LIVEHISTDATA = liveData<List<HitTable>> { HITSLIST }
-        val EMPTYHISTS : List<HitTable> = emptyList()
     }
 
 }

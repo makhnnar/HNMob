@@ -2,7 +2,6 @@ package com.pedrogomez.hnmob.unittest.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.pedrogomez.hnmob.models.db.HitTable
 import com.pedrogomez.hnmob.models.result.Result
 import com.pedrogomez.hnmob.unittest.util.DataHelper
@@ -13,16 +12,11 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.annotation.Config
 
-
-@RunWith(AndroidJUnit4::class)
-@Config(sdk = [29])
 class SharedHitsViewModelTest {
 
-    //@Rule
-    //var instantTaskExecutorRule = InstantTaskExecutorRule()
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var SUT: SharedHitsViewModel
 

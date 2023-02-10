@@ -3,9 +3,13 @@ package com.pedrogomez.hnmob.viewmodel
 import androidx.lifecycle.*
 import com.pedrogomez.hnmob.models.db.HitTable
 import com.pedrogomez.hnmob.models.result.Result
+import com.pedrogomez.hnmob.repository.Repository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
-class SharedHitsViewModel(
+@HiltViewModel
+class SharedHitsViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel(){
 
@@ -61,15 +65,6 @@ class SharedHitsViewModel(
 
     override fun onCleared() {
         super.onCleared()
-    }
-
-    interface Repository{
-
-        suspend fun loadHits(page:Int)
-        suspend fun delete(hitItem: HitTable)
-        suspend fun getAllHits(): List<HitTable>
-        fun observeHits(): LiveData<List<HitTable>>
-
     }
 
 }

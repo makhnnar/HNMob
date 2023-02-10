@@ -1,58 +1,51 @@
 package com.pedrogomez.hnmob.view.di
 
+import android.content.Context
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.pedrogomez.hnmob.repository.HitsProvider
-import com.pedrogomez.hnmob.view.comments.viewmodel.AuthViewModel
-import com.pedrogomez.hnmob.view.comments.viewmodel.CommentsViewModel
-import com.pedrogomez.hnmob.viewmodel.SharedHitsViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
+import com.pedrogomez.hnmob.repository.Repository
+import dagger.Binds
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import io.ktor.client.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.features.json.*
+import io.ktor.client.features.json.serializer.*
 
-val firebaseDataBase = module {
-    single {
+@Module
+@InstallIn(SingletonComponent::class)
+object FirebaseModule {
+
+    @Provides
+    fun providesFirebaseDatabase() : FirebaseDatabase {
         Firebase.database.useEmulator("10.0.2.2", 9000)
-        Firebase.database
+        return Firebase.database
     }
-}
 
-val firebaseAuth = module {
-    single {
+    @Provides
+    fun providesFirebaseAuth(@ApplicationContext appContext: Context) : FirebaseAuth {
         Firebase.auth.useEmulator("10.0.2.2", 9099)
-        Firebase.auth
+        return Firebase.auth
     }
+
 }
 
-val commentsViewModel = module {
-    viewModel {
-        CommentsViewModel(
-            get()
-        )
-    }
+@Module
+@InstallIn(ViewModelComponent::class)
+abstract class RepositoryModule {
+
+    @Binds
+    abstract fun bindHitsProvider(
+        hitsProvider: HitsProvider
+    ): Repository
+
 }
 
-val authViewModel = module {
-    viewModel {
-        AuthViewModel(
-            get()
-        )
-    }
-}
-
-val productsRepository = module {
-    single<SharedHitsViewModel.Repository> {
-        HitsProvider(
-                get(),
-                get()
-        )
-    }
-}
-
-val viewModelListModule = module {
-    viewModel {
-        SharedHitsViewModel(
-            get()
-        )
-    }
-}

@@ -1,0 +1,21 @@
+
+Å
+Qapp/src/androidTest/java/com/pedrogomez/hnmob/CommentsViewModelIntegrationTest.kt,9\d\9db8a16de895dfad3bc5641da2df68b0eae4b6d2
+o
+?app/src/test/java/com/pedrogomez/hnmob/unittest/db/TestingDB.kt,e\8\e8c9a03fe35fc47a56c91fd4ad3994078a3f8b62
+x
+Happ/src/test/java/com/pedrogomez/hnmob/unittest/util/LiveDataTestUtil.kt,4\8\4829b0d87616ac4eb300826898684f27f4d9b78c
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+l
+<app/src/main/java/com/pedrogomez/hnmob/models/db/HitTable.kt,d\a\dacf7405a695f2f98c5a68f85de24cfaa1e52add
+?
+settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
+q
+Aapp/src/main/java/com/pedrogomez/hnmob/repository/HitsProvider.kt,e\e\ee68534971523d088a403c930e0eee0c7e8817f2
+}
+Mapp/src/main/java/com/pedrogomez/hnmob/repository/remote/HitsApiRepository.kt,5\8\587790afb490b2f1abab03003e526a62e25831c9
+w
+Gapp/src/main/java/com/pedrogomez/hnmob/repository/local/HitsDataBase.kt,d\6\d6a1cb0a29bfc2ae998eea63acf128af66bccac9
+j
+:app/src/main/java/com/pedrogomez/hnmob/di/NetworkModule.kt,9\b\9b06422c83ce3f8d5d1b2d33de3799838c1f55bb

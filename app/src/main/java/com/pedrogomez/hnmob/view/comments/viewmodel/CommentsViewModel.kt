@@ -1,5 +1,7 @@
 package com.pedrogomez.hnmob.view.comments.viewmodel
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.firebase.ui.database.FirebaseRecyclerOptions
@@ -8,19 +10,21 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.pedrogomez.hnmob.view.comments.CommentsActivity
 import com.pedrogomez.hnmob.view.comments.model.FriendlyMessage
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
-class CommentsViewModel(
+@HiltViewModel
+class CommentsViewModel @Inject constructor(
     private var db: FirebaseDatabase,
 ) : ViewModel() {
 
-    val comments = MutableLiveData<List<FriendlyMessage>>()
-    val commentsList = mutableListOf<FriendlyMessage>()
+    val coments = MutableLiveData<List<FriendlyMessage>>()
 
     private lateinit var messagesRef : DatabaseReference
 
@@ -39,19 +43,25 @@ class CommentsViewModel(
         var list : MutableList<FriendlyMessage> = mutableListOf()
         db = Firebase.database
         messagesRef = db.getReference(CommentsActivity.COMMENTS).child(idPost)
-        messagesRef.get().addOnSuccessListener {
-            it.children.forEach {
-                val value = it.getValue(FriendlyMessage::class.java)
-                value?.let {
-                    list.add(
-                        it
-                    )
+        try{
+            messagesRef.get().addOnSuccessListener {
+                it.children.forEach {
+                    val value = it.getValue(FriendlyMessage::class.java)
+                    value?.let {
+                        list.add(
+                            it
+                        )
+                    }
                 }
+                coments.postValue(list)
+            }.addOnFailureListener{
+                Log.e("error","exception: ${it.message}",it)
+                coments.postValue(list)
+            }.addOnCanceledListener {
+                Log.e("error","cancelled",)
             }
-            comments.postValue(list)
-            commentsList.addAll(list)
-        }.addOnFailureListener{
-            comments.postValue(list)
+        }catch (e:Exception){
+            Log.e("error","exception: ${e.message}",e)
         }
     }
 

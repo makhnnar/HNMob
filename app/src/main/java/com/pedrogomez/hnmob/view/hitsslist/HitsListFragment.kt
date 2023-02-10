@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.pedrogomez.hnmob.R
@@ -14,14 +16,11 @@ import com.pedrogomez.hnmob.viewmodel.SharedHitsViewModel
 import com.pedrogomez.hnmob.utils.extensions.shortToast
 import com.pedrogomez.hnmob.models.result.Result
 import com.pedrogomez.hnmob.view.hitsslist.view.HitsListView
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class HitsListFragment : Fragment(),
     HitsListView.OnHitsListActions{
 
-    private val sharedHitsViewModel by lazy {
-        requireParentFragment().getViewModel<SharedHitsViewModel>()
-    }
+    private val sharedHitsViewModel : SharedHitsViewModel by activityViewModels()
 
     private lateinit var binding: FragmentHitsListBinding
 

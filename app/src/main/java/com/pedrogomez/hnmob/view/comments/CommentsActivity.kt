@@ -3,14 +3,16 @@ package com.pedrogomez.hnmob.view.comments
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ProgressBar
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pedrogomez.hnmob.databinding.ActivityCommentsBinding
 import com.pedrogomez.hnmob.view.comments.viewmodel.AuthViewModel
 import com.pedrogomez.hnmob.view.comments.viewmodel.CommentsViewModel
 import com.pedrogomez.hnmob.view.login.SignInActivity
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CommentsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCommentsBinding
@@ -18,8 +20,8 @@ class CommentsActivity : AppCompatActivity() {
 
     private lateinit var adapter: FriendlyMessageAdapter
 
-    private val commentsViewModel : CommentsViewModel by viewModel()
-    private val authViewModel : AuthViewModel by viewModel()
+    private val commentsViewModel : CommentsViewModel by viewModels()
+    private val authViewModel : AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

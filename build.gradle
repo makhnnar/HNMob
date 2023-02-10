@@ -2,20 +2,22 @@
 buildscript {
     ext{
         ktor_version = "1.6.5"
-        navigationVersion = "2.3.3"
-        androidXTestCoreVersion = '1.2.0'
+        navigationVersion = '2.5.3'
+        androidXTestCoreVersion = '1.5.0'
         androidXTestExtKotlinRunnerVersion = '1.1.1'
-        roomVersion = '2.4.3'
+        roomVersion = '2.5.0'
         archLifecycleVersion = "2.5.0"
-        coroutinesVersion = '1.2.1'
+        coroutinesVersion = '1.6.4'
         robolectricVersion = '4.3.1'
 
         kotlin_version = "1.6.10"
-        mockk_version = '1.12.4'
+        mockk_version = '1.13.1'
         koin_version = '3.1.2'
         core_testing_version = '2.1.0'
         coroutines_version = '1.5.2'
         junit_version = '4.13.2'
+
+        retrofit_version = '2.9.0'
 
     }
     repositories {
@@ -23,7 +25,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath 'com.android.tools.build:gradle:7.3.1'
         classpath 'com.google.gms:google-services:4.3.13'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
@@ -35,6 +37,7 @@ buildscript {
 
 plugins {
     id 'com.github.ben-manes.versions' version '0.41.0'
+    id 'com.google.dagger.hilt.android' version '2.44' apply false
 }
 
 allprojects {

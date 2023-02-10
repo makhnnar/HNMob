@@ -4,7 +4,6 @@ import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import kotlinx.coroutines.delay
-import org.robolectric.Shadows
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
@@ -46,19 +45,17 @@ fun <T> LiveData<T>.getOrAwaitValue(
 fun <T> LiveData<T>.getOrAwaitValueWithThreadSleep(
         afterObserve: (T) -> Unit = {}
 ){
-    Shadows.shadowOf(Looper.getMainLooper()).runPaused(Runnable() {
-        val observer = object : Observer<T> {
-            override fun onChanged(o: T?) {
-                o?.let {
-                    afterObserve.invoke(it)
-                }
-                Thread.sleep(2000)
-                this@getOrAwaitValueWithThreadSleep.removeObserver(this)
+    val observer = object : Observer<T> {
+        override fun onChanged(o: T?) {
+            o?.let {
+                afterObserve.invoke(it)
             }
+            Thread.sleep(2000)
+            this@getOrAwaitValueWithThreadSleep.removeObserver(this)
         }
-        this.observeForever(observer)
-        Thread.sleep(10000)
-    })
+    }
+    this.observeForever(observer)
+    Thread.sleep(10000)
 }
 
 /**
@@ -70,9 +67,7 @@ fun <T> LiveData<T>.observeForTesting(block: (T) -> Unit) {
     }
     try {
         observeForever(observer)
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
     } finally {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
         removeObserver(observer)
     }
 }
